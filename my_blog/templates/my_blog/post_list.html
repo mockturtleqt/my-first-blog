@@ -1,22 +1,14 @@
-<html>
-	<head>
-		  <title>Mockturtle's blog</title>
-	</head>
-	<body>
-		  <div>
-		  	   <h1><a href="">Mockturtle's blog</a></h1>
-		  </div>
-		  
-		  <div>
-		  	   <p>published: 08.06.2016 04:37</p>
-			   <h2><a href="">Fist post</a></h2>
-			   <p>Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.</p>
-		  </div>
-		  
-		  <div>
-		  	   <p>published: 08.06.2016 04:37</p>
-			   <h2><a href="">Second post</a></h2>
-			   <p>Curiouser and curiouser!</p>
-		  </div>
-	</body>    
-</html>
+{% extends 'my_blog/base.html' %}
+
+
+{% block content %}
+   {% for post in posts %}
+   	  <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
